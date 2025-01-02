@@ -9,7 +9,7 @@ export default function FavoritesScreen() {
         name="heart"
         type="ionicon"
         size={50}
-        color="#FF6B6B"
+        color="#FF0000"
       />
       <Text style={styles.text}>Your favorite recipes will appear here</Text>
     </View>

@@ -1,8 +1,9 @@
+// App.js
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import { ThemeProvider } from '@rneui/themed';
-import Ionicons from '@expo/vector-icons/Ionicons';
+import { ThemeProvider, createTheme } from '@rneui/themed';
+import { Icon } from '@rneui/themed';
 
 // Import screens
 import HomeScreen from './src/screens/HomeScreens';
@@ -13,6 +14,17 @@ import RecipeDetailScreen from './src/screens/RecipeDetailScreen';
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
+// Create a theme
+const theme = createTheme({
+  lightColors: {
+    primary: '#FF0000',
+  },
+  darkColors: {
+    primary: '#FF0000',
+  },
+  mode: 'light',
+});
+
 function HomeTabs() {
   return (
     <Tab.Navigator
@@ -21,14 +33,21 @@ function HomeTabs() {
           let iconName;
 
           if (route.name === 'Home') {
-            iconName = focused ? 'home' : 'home-outline';
+            iconName = 'home';
           } else if (route.name === 'Search') {
-            iconName = focused ? 'search' : 'search-outline';
+            iconName = 'search';
           } else if (route.name === 'Favorites') {
-            iconName = focused ? 'heart' : 'heart-outline';
+            iconName = 'favorite';
           }
 
-          return <Ionicons name={iconName} size={size} color={color} />;
+          return (
+            <Icon
+              name={iconName}
+              type="material"
+              size={size}
+              color={color}
+            />
+          );
         },
         tabBarActiveTintColor: '#FF0000',
         tabBarInactiveTintColor: 'gray',
@@ -43,7 +62,7 @@ function HomeTabs() {
 
 export default function App() {
   return (
-    <ThemeProvider>
+    <ThemeProvider theme={theme}>
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen 
